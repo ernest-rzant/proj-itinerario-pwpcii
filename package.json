@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "SET NODE_ENV=production node ./dist/bin/www.js",
+    "start": "SET NODE_ENV=production && node ./dist/bin/www.js",
     "dev": "babel-watch ./server/bin/www",
     "client:server": "SET NODE_ENV=development && webpack serve --config ./webpack.dev.config.js --mode development",
     "clean:server": "rimraf dist",
