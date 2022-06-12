@@ -5,7 +5,7 @@
  */
 
 // var app = require("../app");
-import app from "../app";
+import app from "@s/app";
 // var debug = require("debug")("project-itinerario:server");
 import Debug from "debug";
 // var http = require('http');
