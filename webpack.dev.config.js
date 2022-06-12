@@ -1,8 +1,6 @@
 // Importando dependencia path
 // dependencia del core de Node
 const path = require("path");
-// Plugins para Webpack
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   // 1. Especificar el archivo de entrada
@@ -16,15 +14,25 @@ module.exports = {
     // 2.3 path publico
     publicPath: "/",
   },
-  // 3. Modulos
+  // 3. Configurando el servidor de desarrollo
+  devServer: {
+    // 3.1 Folder de archivos estaticos
+    static: path.join(__dirname, "public"),
+    // 3.2 Puerto del servidor de desarrollo
+    // de WP (Webpack)
+    port: 8080,
+    // 3.3 Definiendo host
+    host: "localhost",
+  },
+  // 4.0 Modulos
   module: {
     rules: [
-      // 3.1 Regla para Babel
+      // 4.1 Regla para Babel
       {
         test: /\.js$/,
         exclude: /node_modules/,
         use: [
-          // 3.1.1 Primer stage
+          // 4.1.1 Primer stage
           {
             loader: "babel-loader",
             options: {
@@ -43,17 +51,6 @@ module.exports = {
           },
         ],
       },
-      // 3.2 Reglas para Css
-      {
-        test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader],
-      },
     ],
   },
-  // 4. Plugins
-  plugins: [
-    new MiniCssExtractPlugin({
-      filename: path.join("stylesheets", "styles.css"),
-    }),
-  ],
 };
