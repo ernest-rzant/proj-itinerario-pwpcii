@@ -34,7 +34,9 @@ module.exports = {
                   {
                     modules: false,
                     useBuiltIns: "usage",
-                    targets: "> 0.25%, not dead",
+                    targets: {
+                      chrome: "80",
+                    },
                     corejs: 3,
                   },
                 ],
@@ -46,7 +48,7 @@ module.exports = {
       // 3.2 Reglas para Css
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader],
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
     ],
   },
