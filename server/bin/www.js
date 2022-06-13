@@ -8,8 +8,11 @@ import app from '@s/app';
 import Debug from 'debug';
 import http from 'http';
 
+// Importando nuestro logger
+import winston from '../config/winston';
+
 // Creando instancia del debugger
-const debug = Debug('projnotes-2022a:server');
+const debug = Debug('proj-itinerario:server');
 
 /**
  * Get port from environment and store in Express.
@@ -61,11 +64,11 @@ function onError(error) {
   // handle specific listen errors with friendly messages
   switch (error.code) {
     case 'EACCES':
-      console.error(`${bind} requires elevated privileges`);
+      winston.error(`Port: ${bind} requires elevated privileges`);
       process.exit(1);
       break;
     case 'EADDRINUSE':
-      console.error(`${bind} is already in use`);
+      winston.error(`Port: ${bind} is already in use`);
       process.exit(1);
       break;
     default:
@@ -80,5 +83,5 @@ function onListening() {
   const addr = server.address();
   const bind = typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`;
   debug(`Listening on ${bind}`);
-  console.log(`✍ Servidor escuchando 🤖🦻...en ${app.get('port')}`);
+  winston.info(`Servidor escuchando 🤖🦻...en ${app.get('port')}`);
 }
