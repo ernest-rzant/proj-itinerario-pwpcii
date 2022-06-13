@@ -1,98 +1,84 @@
 #!/usr/bin/env node
-
+/* eslint-disable no-console */
 /**
  * Module dependencies.
  */
 
-// var app = require("../app");
-import app from "@s/app";
-// var debug = require("debug")("project-itinerario:server");
-import Debug from "debug";
-// var http = require('http');
-import http from "http";
+import app from '@s/app';
+import Debug from 'debug';
+import http from 'http';
 
 // Creando instancia del debugger
-const debug = Debug("projnotes:server");
+const debug = Debug('projnotes-2022a:server');
 
 /**
  * Get port from environment and store in Express.
  */
 
-const port = normalizePort(process.env.PORT || "3000");
+const port = normalizePort(process.env.PORT || '3000');
 // app es una instnacia de ExpressJs[ ] [ NODE ]
-app.set("port", port);
+app.set('port', port);
 
 /**
  * Create HTTP server.
  */
-
-const server = http.createServer(app);
-
+const server = http.createServer(app); // (req, res, next, err)=> {}
 /**
  * Listen on provided port, on all network interfaces.
  */
 
-// Pone al server a escuchar
-server.listen(port);
+server.listen(port); // Pone al server a escuchar
 // Se registran eventos
-// En caso de error
-server.on("error", onError);
-// Cuando esta escuchando
-server.on("listening", onListening);
+server.on('error', onError); // En caso de error
+server.on('listening', onListening); // Cuando esta escuchando
 
 /**
  * Normalize a port into a number, string, or false.
  */
-
 function normalizePort(val) {
   const port = parseInt(val, 10);
-
   if (isNaN(port)) {
     // named pipe
     return val;
   }
-
   if (port >= 0) {
     // port number
     return port;
   }
-
   return false;
 }
-
 /**
  * Event listener for HTTP server "error" event.
  */
 
 function onError(error) {
-  if (error.syscall !== "listen") {
+  if (error.syscall !== 'listen') {
     throw error;
   }
 
-  var bind = typeof port === "string" ? "Pipe " + port : "Port " + port;
+  const bind = typeof port === 'string' ? `Pipe ${port}` : `Port ${port}`;
 
   // handle specific listen errors with friendly messages
   switch (error.code) {
-    case "EACCES":
-      console.error(`${bind}` + " requires elevated privileges");
+    case 'EACCES':
+      console.error(`${bind} requires elevated privileges`);
       process.exit(1);
       break;
-    case "EADDRINUSE":
-      console.error(`${bind}` + " is already in use");
+    case 'EADDRINUSE':
+      console.error(`${bind} is already in use`);
       process.exit(1);
       break;
     default:
       throw error;
   }
 }
-
 /**
  * Event listener for HTTP server "listening" event.
  */
 
 function onListening() {
   const addr = server.address();
-  const bind = typeof addr === "string" ? `pipe ${addr}` : `port ${addr.port}`;
+  const bind = typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`;
   debug(`Listening on ${bind}`);
-  console.log(`✍ Servidor escuchando 🤖🦻...en ${app.get("port")}`);
+  console.log(`✍ Servidor escuchando 🤖🦻...en ${app.get('port')}`);
 }
